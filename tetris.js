@@ -334,6 +334,11 @@ let nextPiece = createPiece(pieces[pieces.length * Math.random() | 0]);
 
 // 键盘控制
 document.addEventListener('keydown', event => {
+    // 防止方向键和空格键滚动页面
+    if ([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
+        event.preventDefault();
+    }
+    
     if (isGameOver || isPaused) return;
     
     if (event.keyCode === 37) { // 左箭头
