@@ -8,16 +8,16 @@ const nextContext = nextCanvas.getContext('2d');
 context.scale(20, 20);
 nextContext.scale(20, 20);
 
-// 方块颜色
+// 方块颜色 - 莫奈风格配色
 const colors = [
     null,
-    '#FF0D72', // T - 紫红
-    '#0DC2FF', // I - 青色
-    '#0DFF72', // S - 绿色
-    '#F538FF', // Z - 粉色
-    '#FF8E0D', // L - 橙色
-    '#FFE138', // O - 黄色
-    '#3877FF', // J - 蓝色
+    '#6B9AC4', // T - 雾蓝
+    '#C4A06B', // I - 沙金
+    '#9AC46B', // S - 青苔绿
+    '#C46B7A', // Z - 玫瑰粉
+    '#D4B484', // L - 麦黄
+    '#E8D5A3', // O - 奶油黄
+    '#7A8B9A', // J - 灰蓝
 ];
 
 // 方块形状定义
@@ -79,24 +79,18 @@ function createPiece(type) {
     }
 }
 
-// 绘制单个方块
+// 绘制单个方块 - 极简风格
 function drawMatrix(matrix, offset, ctx = context) {
     matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
-                // 主色
                 ctx.fillStyle = colors[value];
                 ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
                 
-                // 高光效果
-                ctx.lineWidth = 0.05;
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                // 极简边框
+                ctx.lineWidth = 0.02;
+                ctx.strokeStyle = 'rgba(94, 104, 116, 0.3)';
                 ctx.strokeRect(x + offset.x, y + offset.y, 1, 1);
-                
-                // 阴影效果
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-                ctx.fillRect(x + offset.x + 0.1, y + offset.y + 0.8, 0.8, 0.1);
-                ctx.fillRect(x + offset.x + 0.8, y + offset.y + 0.1, 0.1, 0.8);
             }
         });
     });
@@ -104,7 +98,7 @@ function drawMatrix(matrix, offset, ctx = context) {
 
 // 绘制游戏区域
 function draw() {
-    context.fillStyle = '#f0f0f0';
+    context.fillStyle = '#EBE5DE';
     context.fillRect(0, 0, canvas.width / 20, canvas.height / 20);
     
     drawMatrix(arena, {x: 0, y: 0});
@@ -113,7 +107,7 @@ function draw() {
 
 // 绘制下一个方块预览
 function drawNext() {
-    nextContext.fillStyle = '#fff';
+    nextContext.fillStyle = '#F5F3ED';
     nextContext.fillRect(0, 0, nextCanvas.width / 20, nextCanvas.height / 20);
     
     const offset = {
